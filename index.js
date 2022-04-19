@@ -11,6 +11,8 @@ const joylashuv = function () {
   return { about, contact, home, login };
 };
 
+const data = fs.readFileSync("./dev-data/data.json", "utf-8");
+
 const joy = joylashuv();
 
 const server = http.createServer((req, res) => {
@@ -27,6 +29,9 @@ const server = http.createServer((req, res) => {
   } else if (urlcha === "/login") {
     res.writeHead(200, { "content-type": "text/html" });
     res.end(joy.login);
+  } else if (urlcha === "/api") {
+    res.writeHead(200, { "content-type": "text/json" });
+    res.end(data);
   } else {
     res.end("<h1>salom qalaysan ishla zurmi ???</h1>");
   }
